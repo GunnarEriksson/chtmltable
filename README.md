@@ -13,7 +13,7 @@ To install the package, add the row below to your `composer.json` file:
         "guer/chtmltable": "dev-master"
     }
 
-If the Anax-MVC framework is used, copy the `webroot/test/test-table-anax-mvc.php` file
+If the Anax-MVC framework is used, copy the `webroot/table-anax-mvc.php` file
 and the `webroot/css/html-table.css` file to each folder in the Anax-MVC webroot directory
 
 ## How to use
