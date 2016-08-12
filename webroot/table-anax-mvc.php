@@ -35,7 +35,7 @@
      		"column1" => "Table Cell 1",
      		"column2" => "Table Cell 2",
      		"column3" => "Table Cell 3",
-     		"column4" => "Table Cell 4",
+     		"column4" => "https://www.google.se",
      		"column5" => "Table Cell 5",
      		"column6" => "Table Cell 6",
      	],
@@ -43,7 +43,7 @@
      		"column1" => "Table Cell 7",
      		"column2" => "Table Cell 8",
      		"column3" => "Table Cell 9",
-     		"column4" => "Table Cell 10",
+     		"column4" => "https://www.google.se",
      		"column5" => "Table Cell 11",
      		"column6" => "Table Cell 12",
      	],
@@ -51,7 +51,7 @@
      		"column1" => "Table Cell 13",
      		"column2" => "Table Cell 14",
      		"column3" => "Table Cell 15",
-     		"column4" => "Table Cell 16",
+     		"column4" => "https://www.google.se",
      		"column5" => "Table Cell 17",
      		"column6" => "Table Cell 18",
      	],
@@ -74,7 +74,7 @@
          'column4' => [
              'title'    => 'Table Header 4',
              'function'	=> function($link) {
-                 return '<a href="https://www.google.se">' . $link . '</a>';
+                 return '<a href="'. $link . '">' . "Google" . '</a>';
              }
          ],
          'column6' => [
