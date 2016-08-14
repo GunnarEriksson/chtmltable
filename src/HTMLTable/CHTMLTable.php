@@ -31,9 +31,9 @@ class CHTMLTable
      * footer. It is possible to specify the table and the tabel cells settings
      * per column.
      *
-     * @param [] $tableSpecs    table settings.
-     * @param [] $data          table cell data.
-     * @param [] $columnSpecs   table columns cell settings.
+     * @param [string] $tableSpecs  table settings.
+     * @param [mixed] $data         table cell data.
+     * @param [mixed] $columnSpecs  table columns cell settings.
      */
     public function __construct($tableSpecs = [], $data = [], $columnSpecs = [])
     {
@@ -47,9 +47,9 @@ class CHTMLTable
      * specified, a table footer. It is possible to specify the table and the
      * tabel cells settings per column.
      *
-     * @param  [] $tableSpec    table settings.
-     * @param  [] $data         table cell data.
-     * @param  [] $columnSpecs  table columns cell settings.
+     * @param [string] $tableSpecs  table settings.
+     * @param [mixed] $data         table cell data.
+     * @param [mixed] $columnSpecs  table columns cell settings.
      *
      * @return object           the html table object.
      */
@@ -85,7 +85,7 @@ class CHTMLTable
      * Merges the table specifications with the default specifications.
      * Default table CSS id is html-table.
      *
-     * @param [] $table     table settings.
+     * @param  [string]  $tableSpec the table specification.
      *
      * @return void
      */
@@ -108,7 +108,7 @@ class CHTMLTable
      *
      * Checks if a CSS class tag is present in the table specification.
      *
-     * @param  []  $tableSpec the table specification.
+     * @param  [string]  $tableSpec the table specification.
      *
      * @return boolean true if class is present in the table specification,
      *                 false otherwise.
@@ -123,9 +123,9 @@ class CHTMLTable
      *
      * Sets the CSS id tag to null.
      *
-     * @param  [] $tableSpec the table specification.
+     * @param  [string] $tableSpec the table specification.
      *
-     * @return [] the table specification without the CSS id tag.
+     * @return [string] the table specification without the CSS id tag.
      */
     private function removeId($tableSpec) {
         $tableSpec['id'] = null;
@@ -140,8 +140,8 @@ class CHTMLTable
      * the table tag in the column specifications. Otherwise, the title is set
      * to the keys name in the table cell data array.
      *
-     * @param  [] $data         table cell data.
-     * @param  [] $columnSpecs  table columns cell settings.
+     * @param  [mixed] $data        table cell data.
+     * @param  [mixed] $columnSpecs table columns cell settings.
      *
      * @return void
      */
@@ -168,7 +168,7 @@ class CHTMLTable
      * the columns. The name of the columns are the key name in the associative
      * array containing data for the table.
      *
-     * @param  [] $data     table cell data.
+     * @param  [mixed] $data    table cell data.
      *
      * @return void
      */
@@ -209,7 +209,7 @@ class CHTMLTable
      * Checks the type tag, in the column specification for one column, if the
      * tag is present and set to footer.
      *
-     * @param  []  $columnSpec    cell settings for one column.
+     * @param  [mixed]  $columnSpec    cell settings for one column.
      *
      * @return boolean true if the cell type belongs to the footer, false otherwise.
      */
@@ -232,11 +232,11 @@ class CHTMLTable
      * the title. If the title tag is not set, the title is the key name in
      * the associative array containing data for the table.
      *
-     * @param  [] $key          the name of the key for the table cell data.
-     * @param  [] $columnSpec   cell settings for one column.
+     * @param  [string] $key        the name of the key for the table cell data.
+     * @param  [mixed] $columnSpec  cell settings for one column.
      *
-     * @return []   the name from the title tag in the cell specification.
-     *              Otherwise, the table cell data key name.
+     * @return [string] the name from the title tag in the cell specification.
+     *                  Otherwise, the table cell data key name.
      */
     private function getTitle($key, $columnSpec)
     {
@@ -248,8 +248,8 @@ class CHTMLTable
      *
      * Sets the table cell data in the table body.
      *
-     * @param  [] $data         table cell data.
-     * @param  [] $columnSpecs  table columns cell settings.
+     * @param  [mixed] $data        table cell data.
+     * @param  [mixed] $columnSpecs table columns cell settings.
      *
      * @return void
      */
@@ -267,8 +267,8 @@ class CHTMLTable
      * Sets table data according to the column specifications, if it is
      * specified. Otherwise it sets the data as it is stored in the data array.
      *
-     * @param  [] $data         table cell data.
-     * @param  [] $columnSpecs  table columns cell settings.
+     * @param  [mixed] $data        table cell data.
+     * @param  [mixed] $columnSpecs table columns cell settings.
      *
      * @return void
      */
@@ -286,7 +286,7 @@ class CHTMLTable
      *
      * Sets table data from the data array.
      *
-     * @param  [] $data     table cell data.
+     * @param  [mixed] $data    table cell data.
      *
      * @return void
      */
@@ -310,8 +310,8 @@ class CHTMLTable
      * does not belong to the footer. Adds a colspan tag, if it is specified
      * for the cell in the column.
      *
-     * @param  [] $data         table cell data.
-     * @param  [] $columnSpecs  table columns cell settings.
+     * @param  [mixed] $data         table cell data.
+     * @param  [mixed] $columnSpecs  table columns cell settings.
      *
      * @return void
      */
@@ -335,7 +335,7 @@ class CHTMLTable
      * Helper method to get the colspan value, if specified in the column
      * specification for the cell.
      *
-     * @param  [] $columnSpec     cell settings for one column.
+     * @param  [mixed] $columnSpec  cell settings for one column.
      *
      * @return int  the colspan value if specified. Otherwise null.
      */
@@ -352,9 +352,9 @@ class CHTMLTable
      * If a function is specified for the cell in the column, the data is
      * runned through the function before it is returned.
      *
-     * @param [] $row           one row of in the array of table data.
-     * @param string $key       the name of the key in the associative data array.
-     * @param [] $columnSpec    cell settings for one column.
+     * @param  [mixed] $row         one row of in the array of table data.
+     * @param  string $key          the name of the key in the associative data array.
+     * @param  [mixed] $columnSpec  cell settings for one column.
      */
     private function getValue($row, $key, $columnSpec)
     {
@@ -372,7 +372,7 @@ class CHTMLTable
      *
      * Checks if the function tag is set for the cell in one column.
      *
-     * @param  []  $columnSpec    cell settings for one column.
+     * @param  [mixed]  $columnSpec    cell settings for one column.
      *
      * @return boolean true if a function is connected to the cell, false otherwise.
      */
@@ -388,8 +388,8 @@ class CHTMLTable
      * in the column. If not function is connected to the cell through the
      * column specification, the value is returned as it is.
      *
-     * @param [] $columnSpec    cell settings for one column
-     * @param mixed $dataValue  the value to run through function, if specified.
+     * @param [mixed] $columnSpec   cell settings for one column
+     * @param mixed $dataValue      the value to run through function, if specified.
      *
      * @return the value.
      */
@@ -409,7 +409,7 @@ class CHTMLTable
      * footer in the column specifications.
      * Adds a colspan tag, if it is specified for the cell in the column.
      *
-     * @param  [] $columnSpecs    table columns cell settings.
+     * @param  [mixed] $columnSpecs table columns cell settings.
      *
      * @return void
      */
@@ -437,7 +437,7 @@ class CHTMLTable
      * If either the function or the value specified, an empty string is
      * returned.
      *
-     * @param  [] $columnSpec   cell settings for one column.
+     * @param  [mixed] $columnSpec  cell settings for one column.
      *
      * @return mixed    the cell data value.
      */

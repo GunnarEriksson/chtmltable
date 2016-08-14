@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/GunnarEriksson/chtmltable.svg?branch=master)](https://travis-ci.org/GunnarEriksson/chtmltable)
+[![Build Status](https://travis-ci.org/GunnarEriksson/chtmltable.svg?branch=master)](https://travis-ci.org/GunnarEriksson/chtmltable) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GunnarEriksson/chtmltable/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GunnarEriksson/chtmltable/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/GunnarEriksson/chtmltable/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GunnarEriksson/chtmltable/?branch=master)
 
 # CHTMLTable
 ## Introduction
