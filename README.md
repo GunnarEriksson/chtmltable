@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/GunnarEriksson/chtmltable.svg?branch=master)](https://travis-ci.org/GunnarEriksson/chtmltable)
+
 # CHTMLTable
 ## Introduction
 CHTMLTable is an PHP class for generating HTML tables with data from an multidimensional
