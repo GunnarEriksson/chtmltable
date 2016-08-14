@@ -255,9 +255,10 @@ class CHTMLTable
      */
     private function createTableBody($data, $columnSpecs)
     {
-        $this->tableBody = "\n<tbody>";
         $this->setTableData($data, $columnSpecs);
-        $this->tableBody .= "\n</tbody>";
+        if (isset($this->tableBody)) {
+            $this->tableBody = "\n<tbody>" . $this->tableBody . "\n</tbody>";
+        }
     }
 
     /**
@@ -414,25 +415,17 @@ class CHTMLTable
      */
     private function createTableFooter($columnSpecs)
     {
-        $isFooterDataAdded = false;
-
-        $this->tableFoot = "\n<tfoot>";
-        $this->tableFoot .= "\n<tr>";
-        foreach ($columnSpecs as $key => $columnSpec) {
+        foreach ($columnSpecs as $columnSpec) {
             if ($this->isTableFooter($columnSpec)) {
                 $colspan = $this->getColspan($columnSpec);
                 $this->tableFoot .= "\n<td{$colspan}>";
                 $this->tableFoot .= $this->getFooterData($columnSpec);
                 $this->tableFoot .= "</td>";
-                $isFooterDataAdded = true;
             }
         }
 
-        if ($isFooterDataAdded) {
-            $this->tableFoot .= "\n</tr>";
-            $this->tableFoot .= "\n</tfoot>";
-        } else {
-            $this->tableFoot = null;
+        if (isset($this->tableFoot)) {
+            $this->tableFoot = "\n<tfoot>\n<tr>" . $this->tableFoot . "\n</tr>\n</tfoot>";
         }
     }
 
