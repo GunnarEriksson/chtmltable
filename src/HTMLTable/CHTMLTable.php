@@ -232,8 +232,9 @@ class CHTMLTable
      * the title. If the title tag is not set, the title is the key name in
      * the associative array containing data for the table.
      *
-     * @param  string[] $key            the name of the key for the table cell data.
-     * @param  mixed[]  $columnSpec     cell settings for one column.
+     * @param  array<integer,string>    $key        the name of the key for the
+     *                                              table cell data.
+     * @param  mixed[]                  $columnSpec cell settings for one column.
      *
      * @return string[] the name from the title tag in the cell specification.
      *                  Otherwise, the table cell data key name.
