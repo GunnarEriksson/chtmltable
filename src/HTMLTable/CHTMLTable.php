@@ -96,7 +96,41 @@ class CHTMLTable
             'id' => 'html-table',
         ];
 
+        if ($this->isClassPresent($tableSpec)) {
+            $tableSpec = $this->removeId($tableSpec);
+        }
+
         $this->tableSpec = array_merge($defaults, $tableSpec);
+    }
+
+    /**
+     * Helper method to check if a CSS class tag is present
+     *
+     * Checks if a CSS class tag is present in the table specification.
+     *
+     * @param  []  $tableSpec the table specification.
+     *
+     * @return boolean true if class is present in the table specification,
+     *                 false otherwise.
+     */
+    private function isClassPresent($tableSpec)
+    {
+        return isset($tableSpec['class']) ? true : false;
+    }
+
+    /**
+     * Helper method to reset the id tag.
+     *
+     * Sets the CSS id tag to null.
+     *
+     * @param  [] $tableSpec the table specification.
+     *
+     * @return [] the table specification without the CSS id tag.
+     */
+    private function removeId($tableSpec) {
+        $tableSpec['id'] = null;
+
+        return $tableSpec;
     }
 
     /**
@@ -142,9 +176,9 @@ class CHTMLTable
     {
         $firstRow = isset($data[0]) ? $data[0] : [];
         foreach ($firstRow as $key => $value) {
-            $this->tableHead .= "\n<td>";
+            $this->tableHead .= "\n<th>";
             $this->tableHead .= $key;
-            $this->tableHead .= "</td>";
+            $this->tableHead .= "</th>";
         }
     }
 
