@@ -2,8 +2,7 @@
 namespace Guer\HTMLTable;
 
 /**
- * Class that generates a table in HTML with table data from an multidimensional
- * associative array.
+ * Class that generates a table in HTML with table data from an array of objects.
  *
  * Through a table specification array it is possible to set an CSS id or
  * a class for the table and a caption.
@@ -165,8 +164,8 @@ class CHTMLTable
      * Helper method to set the column titles from the data array.
      *
      * Uses the first row in the table cell data array to set the titles of
-     * the columns. The name of the columns are the key name in the associative
-     * array containing data for the table.
+     * the columns. The name of the columns are the key name for the objects in
+     * the array containing data for the table.
      *
      * @param  mixed[]  $data   table cell data.
      *
@@ -229,8 +228,8 @@ class CHTMLTable
      * Helper method to get title from a column specification, if specified.
      *
      * Uses the title tag in the column specification for one column to get
-     * the title. If the title tag is not set, the title is the key name in
-     * the associative array containing data for the table.
+     * the title. If the title tag is not set, the title is the key for the
+     * objects int the array containing data for the table.
      *
      * @param  array<integer,string>    $key        the name of the key for the
      *                                              table cell data.
@@ -351,19 +350,26 @@ class CHTMLTable
      *
      * Gets the data from a specific position in one row in the data array.
      * If a function is specified for the cell in the column, the data is
-     * runned through the function before it is returned.
+     * runned through the function before it is returned.If the object key is
+     * specified to object, the reference to the object is fetched from the
+     * array of objects.
      *
-     * @param  mixed[]  $row        one row of in the array of table data.
+     * @param  object   $row        one row of in the array of table data.
      * @param  string   $key        the name of the key in the associative data array.
      * @param  mixed[]  $columnSpec cell settings for one column.
      */
     private function getValue($row, $key, $columnSpec)
     {
         if ($this->isFunctionSpecified($columnSpec)) {
-            $dataValue = isset($row[$key]) ? $row[$key] : "";
+            if ($this->isObjectSpecifiedAsKey($key)) {
+                $dataValue = isset($row) ? $row : "";
+            } else {
+                $dataValue = isset($row->$key) ? $row->$key : "";
+            }
+
             return $this->getValueThroughFunction($columnSpec, $dataValue);
         } else {
-            return isset($row[$key]) ? $row[$key] : "";
+            return isset($row->$key) ? $row->$key : "";
         }
     }
 
@@ -380,6 +386,22 @@ class CHTMLTable
     private function isFunctionSpecified($columnSpec)
     {
         return isset($columnSpec['function']) ? true : false;
+    }
+
+    /**
+     * Helper method to check if the object key is specified to object.
+     *
+     * Checks if the object key starts with object. The check is case insensitive.
+     *
+     * @param  string  $key the name of the key for the object.
+     *
+     * @return boolean true if the key starts with object, false otherwise.
+     */
+    private function isObjectSpecifiedAsKey($key)
+    {
+        $keyRest = substr($key, 0, 6);
+
+        return strcasecmp($keyRest, "object") === 0 ? true : false;
     }
 
     /**

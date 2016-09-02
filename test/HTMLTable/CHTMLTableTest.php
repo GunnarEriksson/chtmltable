@@ -6,24 +6,39 @@ namespace Guer\HTMLTable;
  */
 class CHTMLTableTest extends \PHPUnit_Framework_TestCase
 {
-    private $data = [
-    	0 => ["column1" => "Table Cell 1", "column2" => "Table Cell 2", "column3" => "Table Cell 3"],
-    	1 => ["column1" => "Table Cell 4", "column2" => "Table Cell 5", "column3" => "Table Cell 6"]
-    ];
+    protected $data;
 
     private $defaultHeader = "\n<thead>\n<tr>\n<th>column1</th>\n<th>column2</th>\n<th>column3</th>\n</tr>\n</thead>";
     private $specifiedHeader = "\n<thead>\n<tr>\n<th>Table Header 1</th>\n<th>Table Header 2</th>\n<th>Table Header 3</th>\n</tr>\n</thead>";
     private $defaultBody = "\n<tbody>\n<tr>\n<td>Table Cell 1</td>\n<td>Table Cell 2</td>\n<td>Table Cell 3</td>\n</tr>\n<tr>\n<td>Table Cell 4</td>\n<td>Table Cell 5</td>\n<td>Table Cell 6</td>\n</tr>\n</tbody>";
     private $headColumn1And3 = "\n<thead>\n<tr>\n<th>column1</th>\n<th>column3</th>\n</tr>\n</thead>";
+    private $specifiedHeadColumn1And3 = "\n<thead>\n<tr>\n<th>Table Header 1</th>\n<th>Table Header 3</th>\n</tr>\n</thead>";
     private $bodyColumn1And3 = "\n<tbody>\n<tr>\n<td>Table Cell 1</td>\n<td>Table Cell 3</td>\n</tr>\n<tr>\n<td>Table Cell 4</td>\n<td>Table Cell 6</td>\n</tr>\n</tbody>";
     private $bodyFunctionColumn3 = "\n<tbody>\n<tr>\n<td>Table Cell 1</td>\n<td>Table Cell 2</td>\n<td>Present</td>\n</tr>\n<tr>\n<td>Table Cell 4</td>\n<td>Table Cell 5</td>\n<td>Present</td>\n</tr>\n</tbody>";
     private $defaultFooter = "\n<tfoot>\n<tr>\n<td>Footer Cell 1</td>\n<td>Footer Cell 2</td>\n<td>Footer Cell 3</td>\n</tr>\n</tfoot>";
+
+    protected function setUp() {
+        $row0 = new \stdClass();
+        $row0->column1 = "Table Cell 1";
+        $row0->column2 = "Table Cell 2";
+        $row0->column3 = "Table Cell 3";
+
+        $row1 = new \stdClass();
+        $row1->column1 = "Table Cell 4";
+        $row1->column2 = "Table Cell 5";
+        $row1->column3 = "Table Cell 6";
+
+        $this->data = [
+        	0 => $row0,
+        	1 => $row1,
+        ];
+    }
 
     /**
      * Test not specified table.
      *
      * Test to generate a not specified table. The column headings is the
-     * key name in the multidimensional associative data array.
+     * key name in the array of data objects.
      *
      * @return void
      */
@@ -58,7 +73,7 @@ class CHTMLTableTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test to gnerate a table with the CSS class 'test-table'.
+     * Test to generate a table with the CSS class 'test-table'.
      *
      * @return void
      */
@@ -142,6 +157,27 @@ class CHTMLTableTest extends \PHPUnit_Framework_TestCase
 
         $exp = "<table id='html-table'>" . $this->defaultHeader . $this->bodyFunctionColumn3 . "\n</table>";
         $columnSpec = ['column1' => [], 'column2' => [], 'column3' => ['function' => function($value) {return empty($value) ? 'Not present' : 'Present';}]];
+
+        $table = $table->create([], $this->data, $columnSpec);
+        $res = $table->getHTMLTable();
+
+        $this->assertEquals($exp, $res);
+    }
+
+    /**
+     * Test to generate a table where column one and three are specified and
+     * a title is set. The key name for column three is set to object1 and
+     * in a combination with a specfied function, the object is fetched.
+     * The function returns the value in key column3 in the data object.
+     *
+     * @return void
+     */
+    public function testGenerateTableObjectSpecifiedForColumn3()
+    {
+        $table = new \Guer\HTMLTable\CHTMLTable();
+
+        $exp = "<table id='html-table'>" . $this->specifiedHeadColumn1And3 . $this->bodyColumn1And3 . "\n</table>";
+        $columnSpec = ['column1' => ['title' => 'Table Header 1'], 'object1' => ['title' => 'Table Header 3', 'function' => function($object) {return $object->column3;}]];
 
         $table = $table->create([], $this->data, $columnSpec);
         $res = $table->getHTMLTable();
