@@ -176,7 +176,7 @@ class CHTMLTable
         $firstRow = isset($data[0]) ? $data[0] : [];
         foreach ($firstRow as $key => $value) {
             $this->tableHead .= "\n<th>";
-            $this->tableHead .= $key;
+            $this->tableHead .= htmlentities($key, null, 'UTF-8');
             $this->tableHead .= "</th>";
         }
     }
@@ -296,7 +296,7 @@ class CHTMLTable
             $this->tableBody .= "\n<tr>";
             foreach ($row as $value) {
                 $this->tableBody .= "\n<td>";
-                $this->tableBody .= $value;
+                $this->tableBody .= htmlentities($value, null, 'UTF-8');
                 $this->tableBody .= "</td>";
             }
             $this->tableBody .= "\n</tr>";
@@ -369,7 +369,7 @@ class CHTMLTable
 
             return $this->getValueThroughFunction($columnSpec, $dataValue);
         } else {
-            return isset($row->$key) ? $row->$key : "";
+            return isset($row->$key) ? htmlentities($row->$key, null, 'UTF-8') : "";
         }
     }
 
@@ -410,6 +410,10 @@ class CHTMLTable
      * Runs the value through a function, if a function is connected to the cell
      * in the column. If not function is connected to the cell through the
      * column specification, the value is returned as it is.
+     *
+     * WHEN USING A FUNCTION, NO DATA IS CHECKED. TO BE PROTECTED AGAINST
+     * HARMFUL DATA, THE PROTECTION MUST BE ADDED WHEN THE FUNCTION IS SPECIFIED
+     * WHEN CREATING THE TABLE!
      *
      * @param mixed[]   $columnSpec     cell settings for one column
      * @param mixed     $dataValue      the value to run through function, if specified.

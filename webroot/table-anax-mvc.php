@@ -92,13 +92,13 @@
          'object1' => [
      		'title'     => 'Table Header 2',
      		'function'	=> function($object) {
-     			return $object->column2;
+     			return htmlentities($object->column2, null, 'UTF-8');
      		}
          ],
          'column4' => [
              'title'    => 'Table Header 4',
              'function'	=> function($link) {
-                 return '<a href="'. $link . '">' . "Google" . '</a>';
+                 return '<a href="'. htmlentities($link, null, 'UTF-8') . '">' . "Google" . '</a>';
              }
          ],
          'column6' => [

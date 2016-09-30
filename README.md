@@ -75,7 +75,7 @@ use the associative column specification array.
         $object1 => [
             'title' => 'Table Header 4',
             'function' 	=> function($object) {
-             	return $object->Column4;
+             	return htmlentities($object->Column4, null, 'UTF-8');
         	}
         ],
         $Column5 => [
@@ -121,7 +121,9 @@ CHTMLTable uses the call_user_func function to get settings from an anonymous fu
 examples shows how to add HTML tags, to all cells in the column, to create a link and a
 function to return 'Not present' or 'Present' depending if the value for the cell is
 included in the input array (data). It is also possible to fetch the object with the
-key name starting with the name "object".
+key name starting with the name "object". Note! CHTMLTable does NOT use the function
+htmlentities() when using a function for the data. The protection against harmful
+data must be added in the specified function.
 
 To add a **footer**, use the type tag and set the value to 'footer'. If no type is added, the
 setting is regarded to be column setting. If only a simple value should be added to the footer,
@@ -137,6 +139,7 @@ is also possible to set the tag 'colspan' to span the columns in the footer row.
 To generate a not specified table, just exclude the table specifications. The data
 is presented as it is in number of columns according to the number of keys in the
 data objects. The title of the columns are the name of the keys in the data object.
+CHTMLTable uses the function htmlentities() to show data in the table cells.
 
     $table = $table->create([], $data, []);
     $table->getHTMLTable();
