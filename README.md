@@ -69,7 +69,7 @@ use the associative column specification array.
         $Column2 => [
             'title' => 'Table Header 3',
             'function'	=> function($link) {
-             	return '<a href="https://www.google.se">' . $link . '</a>';
+             	return '<a href="https://www.google.se">' . htmlentities($link, null, 'UTF-8') . '</a>';
         	}
         ],
         $object1 => [
